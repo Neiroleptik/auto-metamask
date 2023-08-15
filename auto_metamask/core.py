@@ -13,6 +13,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium_stealth import stealth
+from selenium.webdriver.common.action_chains import ActionChains
 from webdriver_manager.chrome import ChromeDriverManager, ChromeType
 
 file_path = os.getcwd()
@@ -58,7 +59,7 @@ def setupWebdriver(metamask_path):
     options.add_argument("--start-maximized")
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
-    # options.add_argument("--proxy-server=socks5://127.0.0.1:9050")  # Activate if you need use TOR Proxy. Require RUN Tor Expert Bundle.
+    # options.add_argument("--proxy-server=socks5://127.0.0.1:9050")  # Need RUN Tor Expert Bundle
     # Chrome is controlled by automated test software
     # options.binary_location = "/Applications/Google Chrome Dev.app/Contents/MacOS/Google Chrome Dev"
     options.add_experimental_option('excludeSwitches', ['enable-automation'])
@@ -66,6 +67,7 @@ def setupWebdriver(metamask_path):
     options.add_extension(metamask_path)
     s = Service(executable_path="chromedriver"
                                 "/chromedriver.exe")
+
 
     global driver
     driver = webdriver.Chrome(service=s, options=options)
